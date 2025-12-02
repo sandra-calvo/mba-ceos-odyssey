@@ -24,7 +24,7 @@ export const KEY_TAKEAWAYS = [
     { title: "Industry Structure", text: "You can actively shape industry structure by increasing barriers to entry and switching costs." },
     { title: "Portfolio Strategy", text: "Exit industries with structurally low returns (low ROIC) regardless of short-term growth." },
     { title: "Growth Vectors", text: "Market Development (existing product, new market) is often safer than Unrelated Diversification." },
-    { title: "Capital Allocation", text: "Protect Cash Cows to fund future growth; don't starve the engines of your cash flow." },
+    { title: "Capital Allocation", "text": "Protect Cash Cows to fund future growth; don't starve the engines of your cash flow." },
     { title: "M&A Integration", text: "Prioritize Organizational Fit and culture over immediate 'synergies' to preserve value." },
     { title: "Competitive Advantage", text: "Avoid being 'Stuck in the Middle.' Commit to a clear strategy—either Cost Leadership or Differentiation." }
 ];
@@ -37,6 +37,12 @@ export const LEVELS: { [key: number]: Level } = {
             { id: 1, x: 300, y: PLATFORM_HEIGHT - 120, scenarioId: 1 },
             { id: 2, x: 600, y: PLATFORM_HEIGHT - 120, scenarioId: 2 },
             { id: 3, x: 900, y: PLATFORM_HEIGHT - 120, scenarioId: 3 },
+        ],
+        collectibles: [
+            { id: 101, x: 150, y: PLATFORM_HEIGHT - 150, collected: false },
+            { id: 102, x: 450, y: PLATFORM_HEIGHT - 180, collected: false },
+            { id: 103, x: 750, y: PLATFORM_HEIGHT - 150, collected: false },
+            { id: 104, x: 1050, y: PLATFORM_HEIGHT - 180, collected: false },
         ],
         scenarios: [
             {
@@ -121,26 +127,32 @@ export const LEVELS: { [key: number]: Level } = {
             { id: 5, x: 600, y: PLATFORM_HEIGHT - 120, scenarioId: 5 },
             { id: 6, x: 900, y: PLATFORM_HEIGHT - 120, scenarioId: 6 },
         ],
+        collectibles: [
+            { id: 201, x: 100, y: PLATFORM_HEIGHT - 200, collected: false },
+            { id: 202, x: 500, y: PLATFORM_HEIGHT - 250, collected: false },
+            { id: 203, x: 800, y: PLATFORM_HEIGHT - 200, collected: false },
+            { id: 204, x: 1100, y: PLATFORM_HEIGHT - 220, collected: false },
+        ],
         scenarios: [
             {
                 id: 4,
                 title: "The Internal Engine",
-                prompt: "The Manufacturing SBU has aging machinery and a slow production process (Resource weakness), but decades of internal improvement mean it possesses a unique routine for rapidly scaling new product lines (Capability strength). A competitor offers to sell us state-of-the-art machinery.",
+                prompt: "The Manufacturing SBU reports aging machinery (Resource weakness). They request corporate investment, arguing their unique routine for rapidly scaling new product lines (Capability strength) justifies the upgrade. The CEO must approve capital only if the capability is truly unique.",
                 options: [
                     { 
-                        text: "A. The Buying Spree: Buy the new machinery (Physical Resource) and expect immediate strategic parity.", 
+                        text: "A. The Buying Spree: Approve funding immediately for the machinery (Physical Resource) alone, expecting immediate strategic parity.", 
                         trustChange: -5,
                         outcome: "Acquiring generic Resources (machinery) only offers short-term parity. Competitors can easily buy the same asset. This move does not build a truly Distinctive Capability."
                     },
                     { 
-                        text: "B. The Capability Crush: Sell the existing machinery and fire the long-tenured production management staff (the source of the unique routine).", 
+                        text: "B. The Capability Crush: Reject the funding and mandate the sale of all aging machinery and long-tenured production management staff.", 
                         trustChange: -25,
                         outcome: "This is a strategic mistake! The unique value lies in the human expertise and routine—the Capability—which we just destroyed for a short-term cut. Resources are assets; Capabilities are what make them valuable."
                     },
                     { 
-                        text: "C. The Leveraging Plan: Acquire the machinery, but only if the Manufacturing SBU can successfully integrate it with their unique scaling routine (Capability).", 
-                        trustChange: 15,
-                        outcome: "Correct. The goal is to acquire the modern Resource and successfully integrate it with our existing, non-imitable Capability (the unique scaling routine). This turns a generic asset into a proprietary Distinctive Capability."
+                        text: "C. The Leveraging Plan: Approve funding, mandating that the SBU successfully integrates the new machinery with their unique scaling routine (Capability) to create a proprietary advantage.", 
+                        trustChange: 20,
+                        outcome: "The goal is to acquire the modern Resource and successfully integrate it with our existing, non-imitable Capability (the unique scaling routine). This turns a generic asset into a proprietary Distinctive Capability."
                     },
                 ],
             },
@@ -204,6 +216,12 @@ export const LEVELS: { [key: number]: Level } = {
             { id: 8, x: 600, y: PLATFORM_HEIGHT - 120, scenarioId: 8 },
             { id: 9, x: 900, y: PLATFORM_HEIGHT - 120, scenarioId: 9 },
         ],
+        collectibles: [
+            { id: 301, x: 200, y: PLATFORM_HEIGHT - 200, collected: false },
+            { id: 302, x: 400, y: PLATFORM_HEIGHT - 300, collected: false }, // Requires jump
+            { id: 303, x: 800, y: PLATFORM_HEIGHT - 250, collected: false },
+            { id: 304, x: 1200, y: PLATFORM_HEIGHT - 200, collected: false },
+        ],
         scenarios: [
             {
                 id: 7,
@@ -217,7 +235,7 @@ export const LEVELS: { [key: number]: Level } = {
                     },
                     { 
                         text: "B. The Focused Effort: Choose option 2, launching an existing product type into new international markets.", 
-                        trustChange: 15,
+                        trustChange: 20,
                         outcome: "This is the responsible path. Market Development (using existing product technology in a new geography) is a far less risky growth vector than unrelated diversification. It leverages our current capabilities and focuses on controlled expansion."
                     },
                     { 
@@ -230,17 +248,17 @@ export const LEVELS: { [key: number]: Level } = {
             {
                 id: 8,
                 title: "The SBU Efficiency Grid",
-                prompt: "The Logistics SBU is generating high cash but has low growth. A new SBU is hemorrhaging cash but operates in a high-growth, high-industry-attractive market. The Board wants to cut cash-draining units.",
+                prompt: "The Corporate Centre must make annual budget approvals. The Logistics SBU is generating high cash but has low growth (Cash Cow). A new SBU is hemorrhaging cash but operates in a high-growth market (Question Mark). The Board wants to cut cash-draining units.",
                 options: [
                     { 
-                        text: "A. The Cash Cow Cut: Divest the Logistics SBU (High Share, Low Growth, Cash Cow).", 
+                        text: "A. The Cash Cow Cut: Divest the Logistics SBU (Cash Cow) to free up capital.", 
                         trustChange: -25,
                         outcome: "Cutting a Cash Cow is strategically backward! These low-growth, high-share units are essential to provide the surplus cash flow needed to fund risky Question Marks and high-potential Stars."
                     },
                     { 
                         text: "B. The Reckless Fund: Immediately pump unlimited cash into the new, cash-draining SBU.", 
                         trustChange: -15,
-                        outcome: "We cannot blindly fund a cash-draining unit just because it's high growth. It must demonstrate high relative competitive position (McKinsey Matrix) or be a strategically necessary Question Mark (BCG) to warrant the funding."
+                        outcome: "We cannot blindly fund a cash-draining unit just because it's high growth. It must demonstrate a high relative competitive position (McKinsey Matrix) or be a strategically necessary Question Mark (BCG) to warrant the funding."
                     },
                     { 
                         text: "C. The Balanced Flow: Protect the Logistics SBU (Cash Cow), using its surplus cash to selectively fund the new unit, while demanding a plan to improve its relative competitive position.", 
@@ -252,12 +270,12 @@ export const LEVELS: { [key: number]: Level } = {
             {
                 id: 9,
                 title: "The M&A Integration",
-                prompt: "We are acquiring a high-tech company, 'Target Zeta,' primarily for their unique IP and R&D talent (Strategic Fit). Target Zeta's culture is loose and innovative; Aalto Industries is hierarchical and bureaucratic. The integration plan focuses on imposing Aalto Industries structure immediately.",
+                prompt: "We are acquiring a high-tech company, Target Zeta, primarily for their unique IP and R&D talent (Strategic Fit). Target Zeta's culture is loose and innovative; Aalto Industries is hierarchical and bureaucratic. The CEO must decide the integration path for this soft asset.",
                 options: [
                     { 
                         text: "A. The Synergistic Slam: Immediately impose Aalto Industries centralized HR, IT, and process systems to ensure maximum synergy realization.", 
                         trustChange: -20,
-                        outcome: "A major integration failure. We prioritized immediate process synergies, destroying the very thing we acquired: the R&D talent and culture. Without Organizational Fit, there is no long-term value."
+                        outcome: "Major integration failure! This approach prioritizes synergy speed over retention, destroying the soft capabilities we paid for. A lack of Organizational Justice guarantees that the acquired R&D talent will walk away."
                     },
                     { 
                         text: "B. The Hands-Off Approach: Let Target Zeta operate fully independently forever, simply reporting results to the Board.", 
@@ -265,9 +283,9 @@ export const LEVELS: { [key: number]: Level } = {
                         outcome: "While protecting the culture is good, perpetual independence means we fail to leverage their IP across the conglomerate. We must find a way to integrate selectively."
                     },
                     { 
-                        text: "C. The Phased Integration: Delay structural integration for 12 months, focus on mutual learning, and protect Target Zeta's unique culture and management practices.", 
+                        text: "C. The Phased Integration: Delay structural integration for 12 months, focusing on Procedural Justice and preserving the unique culture, accepting that the realization of synergies will be slower and more complex.", 
                         trustChange: 20,
-                        outcome: "The IP and R&D talent are soft capabilities. We must prioritize Organizational Fit and Procedural Justice by delaying structural integration. This phased approach mitigates culture clash and retains the key talent."
+                        outcome: "Prioritizing Organizational Fit is essential, but be warned: This is the ideal Unelmaskenaario—it requires immense discipline, strong Informational Justice, and managerial capacity to handle dual systems for 12 months to succeed. The complexity risk is high."
                     },
                 ],
             },
@@ -285,11 +303,15 @@ export const LEVELS: { [key: number]: Level } = {
         doors: [
             { id: 11, x: 620, y: PLATFORM_HEIGHT - 240, scenarioId: 11, isFinal: true },
         ],
+        collectibles: [
+             { id: 401, x: 200, y: PLATFORM_HEIGHT - 200, collected: false },
+             { id: 402, x: 1000, y: PLATFORM_HEIGHT - 200, collected: false },
+        ],
         scenarios: [
            {
                 id: 11,
                 title: "The Strategic Showdown",
-                prompt: "The Manufacturing SBU, after years of mixed results, insists on pursuing a \"best value\" strategy: mid-price, mid-quality. Their financial performance (FP) and core competence (CC) are average. A final decision on their competitive future is required.",
+                prompt: "The Corporate Review Panel finds the Manufacturing SBU strategically 'Stuck in the Middle' (mid-price, mid-quality). Their mediocre returns prevent further Corporate funding. The CEO must issue a definitive Strategic Mandate to break the cycle.",
                 options: [
                     { 
                         text: "A. The Focus Option: Nurture the current \"best value\" strategy, arguing that the combination of price and quality works for a broad target market.", 
@@ -299,12 +321,12 @@ export const LEVELS: { [key: number]: Level } = {
                     { 
                         text: "B. The Differentiation Pivot: Invest aggressively in R&D and marketing to achieve genuinely premium status, commanding higher prices (The Differentiator on the Strategy Clock).", 
                         trustChange: -5,
-                        outcome: "This is a coherent strategy, but high-cost and high-risk. We should weigh it against the lower-risk option of cost focus before committing to premium branding."
+                        outcome: "This is a coherent strategic mandate, but high-cost and high-risk. We should weigh it against the lower-risk option of cost focus before committing to premium branding."
                     },
                     { 
-                        text: "C. The Cost Squeeze: Enforce an immediate, deep-cut plan to become the lowest-cost producer globally, even if it means sacrificing some quality features (Cost Leadership).", 
+                        text: "C. Enforce an immediate, deep-cut plan to become the lowest-cost producer globally, even if it means sacrificing some quality features (Cost Leadership).", 
                         trustChange: 20,
-                        outcome: "This forces a definitive trade-off. Committing to Cost Leadership by streamlining the entire value chain is a clear, defensible, and high-volume strategy. We eliminate the ambiguity of being 'Stuck in the Middle' and compete to win."
+                        outcome: "This forces a definitive Trade-Off! Committing to Cost Leadership by streamlining the entire value chain eliminates the fatal ambiguity of being 'Stuck in the Middle.' This is a clean mandate, but SBU leadership must execute a painful operational overhaul immediately."
                     },
                 ]
             }
